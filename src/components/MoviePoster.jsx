@@ -4,8 +4,6 @@ import AppContext from '../AppContext';
 const MoviePoster = memo(({ movie }) => {
   const appContext = useContext(AppContext);
 
-  console.log('render MoviePoster');
-
   const getPosterURL = (path, size) => {
     return `${appContext.secure_base_url}${appContext.poster_sizes[size]}${path}`;
   };

@@ -1,11 +1,20 @@
 import React from 'react';
-import { MoviePoster } from './';
+import { MoviePoster, BigMessage } from './';
 
 const MoviesList = ({ movies }) => {
-  console.log('render MoviesList');
-
   if (!movies) {
     return null;
+  }
+
+  if (movies.results.length === 0) {
+    return (
+      <BigMessage>
+        Oops... No movies found.
+        <span role="img" aria-label="sad face">
+          😥
+        </span>
+      </BigMessage>
+    );
   }
 
   return (
@@ -19,10 +28,6 @@ const MoviesList = ({ movies }) => {
           </div>
         ))}
       </div>
-      <p>
-        {movies.total_results === 10000 && '+'}
-        {movies.total_results} results
-      </p>
     </div>
   );
 };

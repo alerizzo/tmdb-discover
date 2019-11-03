@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useInput } from '../lib/hooks';
+import { Select } from './';
 
 const ReleasedBetween = ({ onChange, initialValue }) => {
   const gte = useInput(initialValue.gte.substr(0, 4) * 1);
@@ -16,27 +17,17 @@ const ReleasedBetween = ({ onChange, initialValue }) => {
       });
   }, [gte.value, lte.value, onChange]);
 
-  const gteYears = new Array(lte.value - minimumYear).fill(null).map((n, idx) => minimumYear + idx);
-  const lteYears = new Array(maximumYear - gte.value).fill(null).map((n, idx) => maximumYear - idx);
-
-  console.log('render ReleasedBetween');
-
-  const YearSelect = ({ field, years }) => (
-    <div className="select is-fullwidth">
-      <select {...field}>
-        {years.map(year => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
+  const gteValues = new Array(lte.value - minimumYear)
+    .fill(null)
+    .map((n, idx) => minimumYear + idx);
+  const lteValues = new Array(maximumYear - gte.value)
+    .fill(null)
+    .map((n, idx) => maximumYear - idx);
 
   return (
     <div className="ReleasedBetween">
-      <YearSelect field={gte} years={gteYears} />
-      <YearSelect field={lte} years={lteYears} />
+      <Select field={gte} values={gteValues} />
+      <Select field={lte} values={lteValues} />
     </div>
   );
 };

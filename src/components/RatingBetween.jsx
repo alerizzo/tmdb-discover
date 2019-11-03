@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useInput } from '../lib/hooks';
+import { Select } from './';
 
 const RatingBetween = ({ onChange, initialValue }) => {
   const gte = useInput(initialValue.gte);
@@ -26,24 +27,10 @@ const RatingBetween = ({ onChange, initialValue }) => {
     .fill(null)
     .map((n, idx) => (maximumRating - idx) * step);
 
-  console.log('render RatingBetween');
-
-  const RatingSelect = ({ field, ratings }) => (
-    <div className="select is-fullwidth">
-      <select {...field}>
-        {ratings.map(year => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-
   return (
     <div className="RatingBetween">
-      <RatingSelect field={gte} ratings={gteRatings} />
-      <RatingSelect field={lte} ratings={lteRatings} />
+      <Select field={gte} values={gteRatings} />
+      <Select field={lte} values={lteRatings} />
     </div>
   );
 };

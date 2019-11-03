@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
-import { Field, SortBySelect, ReleasedBetween, RatingBetween } from '../components';
+import {
+  Field,
+  SortBySelect,
+  ReleasedBetween,
+  RatingBetween,
+  VoteCountBetween,
+} from '../components';
 
 const DiscoveryPanel = memo(({ onSearch }) => {
   const defaultParams = {
     sort_by: 'popularity.desc',
-    'primary_release_date.gte': '1900-01-01',
+    'primary_release_date.gte': '1980-01-01',
     'primary_release_date.lte': `${new Date().getFullYear()}-12-31`,
-    'vote_average.gte': 1,
+    'vote_average.gte': 7,
     'vote_average.lte': 10,
+    'vote_count.gte': 0,
+    'vote_count.lte': 30000,
   };
 
   const [params, setParams] = useState(defaultParams);
@@ -28,12 +36,8 @@ const DiscoveryPanel = memo(({ onSearch }) => {
     [params]
   );
 
-  console.log('render DiscoveryPanel');
-
   /*
     
-    vote_count.gte / lte
-    vote_average.gte / lte
     with_runtime.gte / lte
 
     IDs
@@ -64,6 +68,15 @@ const DiscoveryPanel = memo(({ onSearch }) => {
           initialValue={{
             lte: params['vote_average.lte'],
             gte: params['vote_average.gte'],
+          }}
+        />
+      </Field>
+      <Field label="Vote count between">
+        <VoteCountBetween
+          onChange={handleChange}
+          initialValue={{
+            lte: params['vote_count.lte'],
+            gte: params['vote_count.gte'],
           }}
         />
       </Field>

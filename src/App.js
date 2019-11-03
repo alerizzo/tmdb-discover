@@ -13,8 +13,6 @@ function App() {
     });
   }, []);
 
-  console.log('render - App');
-
   if (!TMDbSettings) return <span>Loading...</span>;
 
   return (

@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses [the TMDb API](https://www.themoviedb.org/documentation/api) but is not endorsed or certified by TMDb. It's just a sample application to showcase some of my personal work, and my way of coding.
 
-You can check the live version at [http://ar-tmdb.surge.sh/](http://ar-tmdb-hooks.surge.sh/).
+You can check the live version at [http://ar-discovery.surge.sh/](http://ar-discovery.surge.sh/).
 
 ## Available Scripts
 

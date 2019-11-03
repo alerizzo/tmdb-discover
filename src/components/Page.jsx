@@ -5,8 +5,6 @@ const Page = props => {
     document.title = `TMDb Client - ${props.title}`;
   });
 
-  console.log('render Page');
-
   return (
     <div className="page">
       <main>

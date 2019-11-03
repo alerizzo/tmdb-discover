@@ -35,8 +35,6 @@ const SortBySelect = ({ onChange, initialValue }) => {
     []
   );
 
-  console.log('render SortBySelect');
-
   return (
     <div className="SortBySelect select is-fullwidth">
       <select {...sortBy}>
