@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.scss';
+import { DiscoverPage } from './pages';
+import { getTMDbSettings } from './lib/TMDbClient';
+import AppContext from './AppContext';
 
 function App() {
+  const [TMDbSettings, setTMDbSettings] = useState(null);
+
+  useEffect(() => {
+    getTMDbSettings().then(response => {
+      setTMDbSettings(response.images);
+    });
+  }, []);
+
+  console.log('render - App');
+
+  if (!TMDbSettings) return <span>Loading...</span>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={TMDbSettings}>
+      <DiscoverPage />
+    </AppContext.Provider>
   );
 }
 
