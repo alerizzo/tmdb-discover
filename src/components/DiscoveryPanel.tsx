@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useState, useEffect, useCallback, memo, FunctionComponent } from 'react';
 import {
   Field,
   SortBySelect,
@@ -7,8 +7,10 @@ import {
   VoteCountBetween,
 } from '../components';
 
-const DiscoveryPanel = memo(({ onSearch }) => {
-  const defaultParams = {
+type DiscoveryPanelProps = { onSearch: Function };
+
+const DiscoveryPanel: FunctionComponent<DiscoveryPanelProps> = memo(({ onSearch }) => {
+  const defaultParams: { [key: string]: any } = {
     sort_by: 'popularity.desc',
     'primary_release_date.gte': '1980-01-01',
     'primary_release_date.lte': `${new Date().getFullYear()}-12-31`,

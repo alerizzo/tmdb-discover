@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 
-const Page = props => {
+type PageProps = { title: string };
+
+const Page: FunctionComponent<PageProps> = ({ title, children }) => {
   useEffect(() => {
-    document.title = `TMDb Client - ${props.title}`;
+    document.title = `TMDb Client - ${title}`;
   });
 
   return (
     <div className="page">
       <main>
-        <div className="container">{props.children}</div>
+        <div className="container">{children}</div>
       </main>
       <footer>
         <div className="container">

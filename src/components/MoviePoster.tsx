@@ -1,11 +1,17 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, FunctionComponent } from 'react';
 import AppContext from '../AppContext';
 
-const MoviePoster = memo(({ movie }) => {
+type MoviePosterProps = { movie: any };
+
+const MoviePoster: FunctionComponent<MoviePosterProps> = memo(({ movie }) => {
   const appContext = useContext(AppContext);
 
-  const getPosterURL = (path, size) => {
-    return `${appContext.secure_base_url}${appContext.poster_sizes[size]}${path}`;
+  const getPosterURL = (path: string, size: number) => {
+    if (appContext) {
+      return `${appContext.secure_base_url}${appContext.poster_sizes[size]}${path}`;
+    }
+
+    return '';
   };
 
   return (

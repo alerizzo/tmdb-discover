@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { DiscoverPage } from './pages';
 import { getTMDbSettings } from './lib/TMDbClient';
-import AppContext from './AppContext';
+import AppContext, { ITMDbSettings } from './AppContext';
 
 function App() {
-  const [TMDbSettings, setTMDbSettings] = useState(null);
+  const [TMDbSettings, setTMDbSettings] = useState<ITMDbSettings | null>(null);
 
   useEffect(() => {
     getTMDbSettings().then(response => {

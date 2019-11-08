@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { useInput } from '../lib/hooks';
 import { Select } from './';
 
-const RatingBetween = ({ onChange, initialValue }) => {
+type RatingBetweenProps = { onChange: Function; initialValue: { gte: string; lte: string } };
+
+const RatingBetween: FunctionComponent<RatingBetweenProps> = ({ onChange, initialValue }) => {
   const gte = useInput(initialValue.gte);
   const lte = useInput(initialValue.lte);
 
@@ -19,11 +21,11 @@ const RatingBetween = ({ onChange, initialValue }) => {
       });
   }, [gte.value, lte.value, onChange]);
 
-  const gteRatings = new Array(lte.value / step - minimumRating)
+  const gteRatings = new Array(parseInt(lte.value) / step - minimumRating)
     .fill(null)
     .map((n, idx) => (minimumRating + idx) * step);
 
-  const lteRatings = new Array(maximumRating - gte.value / step)
+  const lteRatings = new Array(maximumRating - parseInt(gte.value) / step)
     .fill(null)
     .map((n, idx) => (maximumRating - idx) * step);
 

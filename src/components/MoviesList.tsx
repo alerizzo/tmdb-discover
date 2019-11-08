@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { MoviePoster, BigMessage } from './';
 
-const MoviesList = ({ movies }) => {
+type MoviesArray = {
+  results: { id: number }[];
+};
+
+type MoviesListProps = { movies: MoviesArray };
+
+const MoviesList: FunctionComponent<MoviesListProps> = ({ movies }) => {
   if (!movies) {
     return null;
   }

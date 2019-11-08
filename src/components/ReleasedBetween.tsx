@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import { useInput } from '../lib/hooks';
 import { Select } from './';
 
-const ReleasedBetween = ({ onChange, initialValue }) => {
-  const gte = useInput(initialValue.gte.substr(0, 4) * 1);
-  const lte = useInput(initialValue.lte.substr(0, 4) * 1);
+type ReleasedBetweenProps = { onChange: Function; initialValue: { gte: string; lte: string } };
+
+const ReleasedBetween: FunctionComponent<ReleasedBetweenProps> = ({ onChange, initialValue }) => {
+  const gte = useInput(initialValue.gte.substr(0, 4));
+  const lte = useInput(initialValue.lte.substr(0, 4));
 
   const minimumYear = 1900;
-  const maximumYear = new Date().getFullYear() * 1;
+  const maximumYear = new Date().getFullYear();
 
   useEffect(() => {
     onChange &&
@@ -17,10 +19,10 @@ const ReleasedBetween = ({ onChange, initialValue }) => {
       });
   }, [gte.value, lte.value, onChange]);
 
-  const gteValues = new Array(lte.value - minimumYear)
+  const gteValues = new Array(parseInt(lte.value) - minimumYear)
     .fill(null)
     .map((n, idx) => minimumYear + idx);
-  const lteValues = new Array(maximumYear - gte.value)
+  const lteValues = new Array(maximumYear - parseInt(gte.value))
     .fill(null)
     .map((n, idx) => maximumYear - idx);
 
